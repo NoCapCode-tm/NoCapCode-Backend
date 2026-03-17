@@ -360,4 +360,4 @@ UserSchema.methods.Token = function(){
     }
 )
 }
-export const User = mongoose.model("User",UserSchema)
+export const Employee = mongoose.model("Employee",UserSchema)

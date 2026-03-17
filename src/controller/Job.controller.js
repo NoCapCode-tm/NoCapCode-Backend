@@ -7,7 +7,7 @@ import { Applicant } from "../models/Applicant.models.js";
 import { Case } from "../models/CaseStudies.models.js";
 import { uploadToCloudinary } from "../utils/cloudinary.utils.js";
 import { Resend } from 'resend';
-import { User } from "../models/Employee.models.js";
+import { Employee } from "../models/Employee.models.js";
 
 export const createJob =asynchandler(async (req, res) => {
   try {
@@ -961,7 +961,7 @@ export const credentialverify = asynchandler(async(req,res)=>{
     throw new Apierror(400,"Please fill all the required fields")
   }
 
-  const employee = await User.findById(credid)
+  const employee = await Employee.findById(credid)
 
   if(!employee){
     throw new Apierror(400,"Employee not found")
@@ -1194,7 +1194,7 @@ export const verify = asynchandler(async(req,res)=>{
     throw new Apierror(400,"Please fill all the required fields")
   }
 
- const employee =  await User.findById(credid)
+ const employee =  await Employee.findById(credid)
 
   if(!employee){
     throw new Apierror(400,"Employee not found")
@@ -1207,7 +1207,7 @@ export const verify = asynchandler(async(req,res)=>{
 })
 
 export const allemployees = asynchandler(async(req,res)=>{
-  const employees = await User.find();
+  const employees = await Employee.find();
   if(!employees){
     throw new Apierror(400,"User not found")
   }
