@@ -30,7 +30,7 @@ jobrouter.route("/getjobs").get(getAllJobs)
 jobrouter.route("/getcertificate/:credid").get(verifyAdmin,verify)
 jobrouter.route("/getapplicants").get(getJobApplicants)
 jobrouter.route("/getallcasestudy").get(getcasestudy)
-jobrouter.route("/getalluser").get(allemployees)
+jobrouter.route("/getalluser").get(verifyAdmin,allemployees)
 
 export {jobrouter}
 
