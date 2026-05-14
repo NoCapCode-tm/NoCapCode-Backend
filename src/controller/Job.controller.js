@@ -377,7 +377,7 @@ export const adminlogin = asynchandler(async (req, res) => {
 
     return res.status(200)
     .cookie("token",token,options)
-    json(
+    .json(
       new Apiresponse(200, "Login Successful", {
         token
       })
