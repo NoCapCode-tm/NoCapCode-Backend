@@ -2,6 +2,7 @@
 import dotenv from "dotenv"
 import { connectdb } from "./database/dbconnect.js"
 import { app } from "./app.js"
+import atlasDb from "./database/atlasdb.js"
 
 dotenv.config({
     path:"./env"
@@ -9,6 +10,7 @@ dotenv.config({
 
 
 const PORT = process.env.PORT || 5000
+
 connectdb()
 .then(()=>{
     app.listen(PORT ,()=>{
