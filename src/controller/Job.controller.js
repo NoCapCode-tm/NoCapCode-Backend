@@ -367,7 +367,17 @@ export const adminlogin = asynchandler(async (req, res) => {
       }
     );
 
-    return res.status(200).json(
+    const options = {
+    httpOnly:true,
+    secure:true,
+    sameSite:"None",
+    maxAge:9*60*60*1000
+  }
+
+
+    return res.status(200)
+    .cookie("token",token,options)
+    json(
       new Apiresponse(200, "Login Successful", {
         token
       })
