@@ -2,7 +2,7 @@ import { Job } from "../models/Job.models.js";
 import { Apierror } from "../utils/Apierror.utils.js";
 import { Apiresponse } from "../utils/Apiresponse.utils.js";
 import { asynchandler } from "../utils/Asynchandler.utils.js";
-
+import jwt from "jsonwebtoken";
 import { Applicant } from "../models/Applicant.models.js";
 import { Case } from "../models/CaseStudies.models.js";
 import { uploadToCloudinary } from "../utils/cloudinary.utils.js";
@@ -341,21 +341,42 @@ export const getcasestudy = asynchandler(async(req,res)=>{
   .json(new Apiresponse(201,"Case Study Fetched Successfully",casestudy))
 })
 
-export const adminlogin = asynchandler(async(req,res)=>{
-    const{userid,password} = req.body
 
-  if(!userid || !password){
-    throw new Apierror(400,"Please fill all the required Details")
+
+export const adminlogin = asynchandler(async (req, res) => {
+
+  const { userid, password } = req.body;
+
+  if (!userid || !password) {
+    throw new Apierror(400, "Please fill all the required Details");
   }
 
-  if(userid === process.env.ADMIN_LOGIN_ID  && password === process.env.ADMIN_PASSWORD){
-   res.status(200)
-  .json(new Apiresponse(201,"Login Successfull"))
-  }else{
-    throw new Apierror(401,"Unauthorized Access")
+  if (
+    userid === process.env.ADMIN_LOGIN_ID &&
+    password === process.env.ADMIN_PASSWORD
+  ) {
+
+    const token = jwt.sign(
+      {
+        role: "admin",
+        userid
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1d"
+      }
+    );
+
+    return res.status(200).json(
+      new Apiresponse(200, "Login Successful", {
+        token
+      })
+    );
+
+  } else {
+    throw new Apierror(401, "Unauthorized Access");
   }
-  
-})
+});
 
 export const contactus = asynchandler(async(req,res)=>{
   const{name,email,message}=req.body
