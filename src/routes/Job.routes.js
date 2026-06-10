@@ -1,5 +1,5 @@
 import {Router} from "express"
-import { addcasestudy, adminlogin, allemployees, applyForJob, clarity, contactus, createJob, credentialverify, getAllJobs, getcasestudy, getJobApplicants, verify } from "../controller/Job.controller.js"
+import { addcasestudy, adminlogin, allemployees, applyForJob, clarity, contactus, createJob, credentialverify, getAllJobs, getcasestudy, getJobApplicants, seedSpaceForm, verify } from "../controller/Job.controller.js"
 import { upload } from "../middleware/multer.middleware.js"
 import { verifyAdmin } from "../middleware/adminauth.middleware.js"
 
@@ -22,6 +22,7 @@ jobrouter.route("/addcertificate").post(upload.fields([
 )
 jobrouter.route("/contactus").post(contactus)
 jobrouter.route("/clarity").post(clarity)
+jobrouter.route("/seedSpace").post(seedSpaceForm)
 
 
 //get apis
