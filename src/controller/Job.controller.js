@@ -1025,7 +1025,7 @@ const duration =
   const resend2 = new Resend(process.env.RESEND_API_KEY);
              await resend2.emails.send({
           from: `NoCapCode <${process.env.SMTP_USER}>`,
-          to: [employee.email],
+          to: [employee.Emails.email],
           subject: "Internship Completion Cetificate | NoCapCode",
           html:`
           <!DOCTYPE html>
