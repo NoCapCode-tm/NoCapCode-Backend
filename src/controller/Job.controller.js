@@ -8,6 +8,7 @@ import { Case } from "../models/CaseStudies.models.js";
 import { uploadToCloudinary } from "../utils/cloudinary.utils.js";
 import { Resend } from 'resend';
 import { Employee} from "../models/Employee.models.js";
+import { SeedSpace } from "../models/seedSpace.models.js";
 
 export const createJob =asynchandler(async (req, res) => {
   try {
@@ -1247,4 +1248,271 @@ export const allemployees = asynchandler(async(req,res)=>{
   }
   res.status(200)
   .json(new Apiresponse(200,"User Fetched Successfully",employees))
+})
+
+
+
+export const seedSpaceForm = asynchandler(async(req,res)=>{
+
+  const{businessName,name,phone,email,teamSize}=req.body
+
+  if(!businessName || !name || !phone || !email || !teamSize){
+    throw new Apierror(400,"Please fill all the required fields")
+  }
+  const details = await SeedSpace.create({
+    businessName, name, phone, email, teamSize
+  })
+
+
+   const resend = new Resend(process.env.RESEND_API_KEY);
+             await resend.emails.send({
+          from: `NoCapCode <${process.env.SMTP_USER}>`,
+          to: [email],
+          subject: "Your SeedSpace application is under review!",
+          html:`
+          <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Application Received - SeedSpace</title>
+</head>
+
+<body style="margin:0; padding:0; background:#0F0F0F; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#0F0F0F;">
+  <tr>
+    <td align="center" style="padding:48px 16px;">
+      
+      <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px; background:#000000; border-radius:12px; border: 1px solid #333333; box-shadow: 0 4px 24px rgba(0,0,0,0.5); overflow:hidden;">
+        
+        <tr>
+          <td style="padding:48px 32px 20px; text-align:center;">
+            <img src="https://nocapcode.cloud/seedspace/logo.png" alt="SeedSpace" height="50" style="display:block; margin:0 auto 16px;" />
+            <p style="margin:16px 0 0; font-size:14px; color:#A1A1AA; font-weight: 400; letter-spacing: 0.3px;">
+              A selective initiative for start-ups and early-stage founders
+            </p>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:10px 36px 40px; color:#E5E7EB;">
+
+            <hr style="border:none; border-top:1px solid #27272A; margin-bottom: 30px;">
+
+            <p style="margin:0 0 18px; font-size:15px; color:#FFFFFF;">
+              Hi <strong>${name}</strong>,
+            </p>
+
+            <p style="margin:0 0 18px; font-size:15px; line-height:1.7; color:#D4D4D8;">
+              Thank you for applying to SeedSpace with <strong>${businessName}</strong>. We have successfully received your application.
+            </p>
+
+            <p style="margin:0 0 28px; font-size:15px; line-height:1.7; color:#D4D4D8;">
+              We review every application carefully to ensure we're the right fit before moving forward. Our team will now evaluate your submission.
+            </p>
+
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#111111; border-left: 3px solid #E5E7EB; border-radius:4px; padding:24px;">
+              <tr>
+                <td>
+                  <p style="margin:0; font-size:14.5px; line-height:1.6; color:#F4F4F5;">
+                    <strong style="color:#FFFFFF;">What's next?</strong><br>
+                    Once our evaluation is complete, we will connect with you within <strong style="color:#FFFFFF;">4-7 Business Days</strong> regarding the status of your application.
+                  </p>
+                </td>
+              </tr>
+            </table>
+
+            <p style="margin:36px 0 0; font-size:15px; color:#A1A1AA;">
+              Best regards,<br/>
+              <span style="color:#FFFFFF; font-weight:500;">The SeedSpace Team</span>
+            </p>
+
+          </td>
+        </tr>
+      </table>
+
+      <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px; margin-top:20px; text-align:center; color:#777777; font-size:12px; line-height: 1.6;">
+        <tr>
+          <td style="padding:20px 20px 10px 20px;">
+            If you have any questions, contact us at
+            <a href="mailto:operations@nocapcode.cloud" style="color:#A1A1AA; text-decoration:underline;">
+              operations@nocapcode.cloud
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom:12px;">
+            <a href="https://www.linkedin.com/company/nocapcode" target="_blank" style="text-decoration:none;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#777777">
+                <path d="M20.447 20.452H16.893V14.847C16.893 13.522 16.868 11.813 15.049 11.813C13.205 11.813 12.923 13.248 12.923 14.754V20.452H9.368V9H12.782V10.561H12.829C13.306 9.659 14.468 8.707 16.221 8.707C19.897 8.707 20.447 11.07 20.447 14.138V20.452ZM5.337 7.433C4.196 7.433 3.27 6.507 3.27 5.367C3.27 4.227 4.196 3.301 5.337 3.301C6.477 3.301 7.403 4.227 7.403 5.367C7.403 6.507 6.477 7.433 5.337 7.433ZM7.119 20.452H3.555V9H7.119V20.452Z" />
+              </svg>
+            </a>
+          </td>
+        </tr>
+        
+        <tr>
+          <td style="padding-bottom:6px;">
+            <a href="https://nocapcode.cloud" target="_blank" style="color:#777777; text-decoration:none; margin:0 6px;">Home</a> |
+            <a href="https://nocapcode.cloud/services" target="_blank" style="color:#777777; text-decoration:none; margin:0 6px;">Services</a> |
+            <a href="https://nocapcode.cloud/about" target="_blank" style="color:#777777; text-decoration:none; margin:0 6px;">About</a> |
+            <a href="https://nocapcode.cloud/contact" target="_blank" style="color:#777777; text-decoration:none; margin:0 6px;">Contact</a>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding-bottom:12px;">
+            <a href="https://nocapcode.cloud/privacy" target="_blank" style="color:#777777; text-decoration:none; margin:0 6px;">Privacy</a> |
+            <a href="https://nocapcode.cloud/terms" target="_blank" style="color:#777777; text-decoration:none; margin:0 6px;">Terms</a> |
+            <a href="https://nocapcode.cloud/security" target="_blank" style="color:#777777; text-decoration:none; margin:0 6px;">Security</a>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding-top:10px; border-top: 1px solid #222222; color:#555555;">
+            &copy; 2024-26 NoCapCode, Inc. All rights reserved.<br>
+            Santa Fe ・ New Mexico 87501, USA
+            <br><br>
+            <span style="font-size: 10px; color:#555555;">
+              You are receiving this email because you submitted an application to the SeedSpace™ initiative. <br>
+              To stop receiving these automated messages, you can <a href="#" style="color:#777777; text-decoration:underline;">unsubscribe here</a>.
+            </span>
+          </td>
+        </tr>
+      </table>
+
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
+          `
+        });
+
+ const resend1 = new Resend(process.env.RESEND_API_KEY);
+             await resend1.emails.send({
+          from: `NoCapCode <${process.env.SMTP_USER}>`,
+          to:  [process.env.SMTP_USER],
+          subject: "New SeedSpace Application Received",
+          html:`
+          <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New SeedSpace Application</title>
+</head>
+
+<body style="margin:0; padding:0; background:#0F0F0F; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#0F0F0F;">
+  <tr>
+    <td align="center" style="padding:48px 16px;">
+      
+      <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px; background:#000000; border-radius:12px; border:1px solid #333333; box-shadow:0 4px 24px rgba(0,0,0,0.5); overflow:hidden;">
+        
+        <tr>
+          <td style="padding:40px 32px 30px; background:#000000; text-align:center; border-bottom: 1px solid #333333;">
+            <img src="https://nocapcode.cloud/seedspace/logo.png" alt="SeedSpace" height="40" style="display:block; margin:0 auto 16px;" />
+            <h1 style="margin:0; font-size:20px; font-weight:400; color:#FFFFFF; letter-spacing:0.5px;">
+              New Application Received
+            </h1>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:36px; color:#E5E7EB;">
+            <p style="margin:0 0 24px; font-size:15px; color:#A1A1AA;">
+              A new application has been submitted for the SeedSpace initiative. Here are the details:
+            </p>
+
+            <table width="100%" cellpadding="14" cellspacing="0" style="background:#111111; border-radius:8px; border:1px solid #333333; font-size:14px;">
+              <tr>
+                <td style="width:40%; font-weight:600; border-bottom:1px solid #333333; color:#FFFFFF;">Business Name:</td>
+                <td style="width:60%; border-bottom:1px solid #333333; color:#D4D4D8;">${businessName}</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; border-bottom:1px solid #333333; color:#FFFFFF;">Owner Name:</td>
+                <td style="border-bottom:1px solid #333333; color:#D4D4D8;">${name}</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; border-bottom:1px solid #333333; color:#FFFFFF;">Phone Number:</td>
+                <td style="border-bottom:1px solid #333333; color:#D4D4D8;">${phone}</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; border-bottom:1px solid #333333; color:#FFFFFF;">Email Address:</td>
+                <td style="border-bottom:1px solid #333333;">
+                  <a href="mailto:{email}" style="color:#E5E7EB; text-decoration:underline;">${email}</a>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:#FFFFFF;">Current Team Size:</td>
+                <td style="color:#D4D4D8;">${teamSize}</td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+
+      <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px; margin-top:20px; text-align:center; color:#777777; font-size:12px; line-height: 1.6;">
+        <tr>
+          <td style="padding:20px 20px 10px 20px;">
+            If you have any questions, contact us at
+            <a href="mailto:operations@nocapcode.cloud" style="color:#A1A1AA; text-decoration:underline;">
+              operations@nocapcode.cloud
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom:12px;">
+            <a href="https://www.linkedin.com/company/nocapcode" target="_blank" style="text-decoration:none;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#777777">
+                <path d="M20.447 20.452H16.893V14.847C16.893 13.522 16.868 11.813 15.049 11.813C13.205 11.813 12.923 13.248 12.923 14.754V20.452H9.368V9H12.782V10.561H12.829C13.306 9.659 14.468 8.707 16.221 8.707C19.897 8.707 20.447 11.07 20.447 14.138V20.452ZM5.337 7.433C4.196 7.433 3.27 6.507 3.27 5.367C3.27 4.227 4.196 3.301 5.337 3.301C6.477 3.301 7.403 4.227 7.403 5.367C7.403 6.507 6.477 7.433 5.337 7.433ZM7.119 20.452H3.555V9H7.119V20.452Z" />
+              </svg>
+            </a>
+          </td>
+        </tr>
+        
+        <tr>
+          <td style="padding-bottom:6px;">
+            <a href="https://nocapcode.cloud" target="_blank" style="color:#777777; text-decoration:none; margin:0 6px;">Home</a> |
+            <a href="https://nocapcode.cloud/services" target="_blank" style="color:#777777; text-decoration:none; margin:0 6px;">Services</a> |
+            <a href="https://nocapcode.cloud/about" target="_blank" style="color:#777777; text-decoration:none; margin:0 6px;">About</a> |
+            <a href="https://nocapcode.cloud/contact" target="_blank" style="color:#777777; text-decoration:none; margin:0 6px;">Contact</a>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding-bottom:12px;">
+            <a href="https://nocapcode.cloud/privacy" target="_blank" style="color:#777777; text-decoration:none; margin:0 6px;">Privacy</a> |
+            <a href="https://nocapcode.cloud/terms" target="_blank" style="color:#777777; text-decoration:none; margin:0 6px;">Terms</a> |
+            <a href="https://nocapcode.cloud/security" target="_blank" style="color:#777777; text-decoration:none; margin:0 6px;">Security</a>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding-top:10px; border-top: 1px solid #222222; color:#555555;">
+            &copy; 2024-26 NoCapCode, Inc. All rights reserved.<br>
+            Santa Fe ・ New Mexico 87501, USA
+            <br><br>
+            <span style="font-size: 10px; color:#444444; text-transform: uppercase;">Confidentiality Notice: This email and any attachments contain confidential applicant information.<br>Do not forward or distribute outside the organization.</span>
+          </td>
+        </tr>
+      </table>
+
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
+          `
+        });
+
+
+res.status(200)
+.json(new Apiresponse(201,"Contact us completed"))
+
 })
