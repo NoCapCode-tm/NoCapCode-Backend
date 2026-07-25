@@ -1109,19 +1109,15 @@ const duration =
         </p>
 
         <p style="margin:0 0 16px; font-size:14px; line-height:1.7;">
-          Throughout your time with us, you demonstrated professionalism, ownership, and a strong 
-          willingness to learn. Your contributions consistently reflected clarity in execution, 
-          accountability in responsibilities, and a meaningful commitment to team success.
+          During your time with our organization, you consistently exhibited a high standard of professionalism, proactive ownership, and a commendable aptitude for continuous learning. Your contributions demonstrated precise execution, steadfast accountability, and a clear alignment with our core operational objectives and team success.
         </p>
 
         <p style="margin:0 0 24px; font-size:14px; line-height:1.7;">
-          We sincerely appreciate the dedication and positive energy you brought into the organization. 
-          It has been a pleasure having you as part of our team, and we trust that this experience 
-          has added meaningful value to your professional journey.
+          We extend our sincere appreciation for the dedication and positive impact you have brought to the firm. It has been a distinct privilege to have you collaborate with our teams, and we are confident that the competencies you have developed here will serve as a robust foundation for your future career trajectory.
         </p>
 
         <!-- Certificate Preview -->
-        <table width="100%" cellpadding="0" cellspacing="0" style="margin:20px 0;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin:30px 0;">
           <tr>
             <td align="center">
               <img
@@ -1157,18 +1153,17 @@ const duration =
         </table>
 
         <p style="margin:18px 0 0; font-size:13px; color:#6B7280; line-height:1.6;">
-          Your certificate is securely verifiable through our official verification portal. 
-          We encourage you to share it proudly across your professional platforms.
+          Please note that your certificate is cryptographically secured and independently verifiable via our official corporate portal. We encourage you to append this certification to your professional portfolio and networking platforms.
         </p>
 
         <p style="margin:24px 0 0; font-size:14px;">
-          Wishing you continued success in your future endeavors.
+          We wish you the utmost success in all your future professional endeavors.
         </p>
 
         <p style="margin:16px 0 0; font-size:14px;">
-          Warm regards,<br/>
-          <strong>Talent Acquisition & HR Team</strong><br/>
-          NoCapCode™
+          Sincerely,<br/>
+          <strong>Talent Acquisition & Human Resources</strong><br/>
+          NoCapCode Inc.
         </p>
 
       </td>
