@@ -1066,7 +1066,7 @@ const duration =
       ">
         
         <img
-          src="https://nocapcode.cloud/Companylogo.png"
+          src="https://nocapcode.cloud/internal/Companylogo.png"
           alt="NoCapCode"
           width="140"
           style="display:block; margin:0 auto 18px;"
@@ -1138,7 +1138,7 @@ const duration =
         <table width="100%" cellpadding="0" cellspacing="0" style="margin:28px 0 10px;">
           <tr>
             <td align="center">
-              <a href="https://nocapcode.cloud/#/verify/certificate/${employee._id}" 
+              <a href="https://nocapcode.cloud/verify/certificate/${employee._id}" 
                  style="
                    display:inline-block;
                    padding:14px 28px;
@@ -1174,32 +1174,127 @@ const duration =
       </td>
     </tr>
 
-    <!-- Enhanced Footer -->
-    <tr>
-      <td style="
-        padding:26px 32px;
-        background:#F9FAFB;
-        border-top:1px solid #E5E7EB;
-        text-align:center;
-      ">
-        <p style="margin:0 0 6px; font-size:12px; color:#6B7280;">
-          This communication was issued by NoCapCode™ Talent Acquisition & Human Resources.
-        </p>
 
-        <p style="margin:0 0 6px; font-size:12px; color:#6B7280;">
-          Certificate Verification Portal:
-          <a href="https://nocapcode.cloud/#/verify/certificate/${employee._id}" 
-             style="color:#4F46E5; text-decoration:none;">
-             nocapcode.cloud/#/verify/certificate/${employee._id}
+<!-- Footer -->
+<table width="100%" cellpadding="0" cellspacing="0" style="
+  margin-top:24px;
+  background:#F9FAFB;
+  border-top:1px solid #E5E7EB;
+">
+  <tr>
+    <td align="center" style="padding:28px 24px;">
+
+      <!-- Support -->
+      <p style="
+        margin:0 0 12px;
+        font-size:13px;
+        color:#6B7280;
+        line-height:1.7;
+      ">
+        Questions regarding your certificate or verification?<br>
+        Contact our Talent Acquisition &amp; HR Team at
+        <a
+          href="mailto:hr@nocapcode.cloud"
+          style="
+            color:#4F46E5;
+            text-decoration:none;
+            font-weight:600;
+          "
+        >
+          hr@nocapcode.cloud
+        </a>
+      </p>
+
+      <!-- LinkedIn -->
+      <p style="padding-bottom:12px;">
+      <a href="https://www.linkedin.com/company/nocapcode" target="_blank" style="text-decoration:none;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#777777">
+        <path d="M20.447 20.452H16.893V14.847C16.893 13.522 16.868 11.813 15.049 11.813C13.205 11.813 12.923 13.248 12.923 14.754V20.452H9.368V9H12.782V10.561H12.829C13.306 9.659 14.468 8.707 16.221 8.707C19.897 8.707 20.447 11.07 20.447 14.138V20.452ZM5.337 7.433C4.196 7.433 3.27 6.507 3.27 5.367C3.27 4.227 4.196 3.301 5.337 3.301C6.477 3.301 7.403 4.227 7.403 5.367C7.403 6.507 6.477 7.433 5.337 7.433ZM7.119 20.452H3.555V9H7.119V20.452Z" />
+      </svg>
+      </p>
+
+        <!-- Quick Links -->
+        <p style="
+          margin:0 0 18px;
+          font-size:12px;
+          color:#6B7280;
+        ">
+          <a
+            href="https://nocapcode.cloud/privacy"
+            target="_blank"
+            style="color:#6B7280; text-decoration:none;"
+          >
+            Privacy Policy
+          </a>
+          &nbsp;|&nbsp;
+          <a
+            href="https://nocapcode.cloud/terms"
+            target="_blank"
+            style="color:#6B7280; text-decoration:none;"
+          >
+            Terms of Service
+          </a>
+          &nbsp;|&nbsp;
+          <a
+            href="https://nocapcode.cloud/security"
+            target="_blank"
+            style="color:#6B7280; text-decoration:none;"
+          >
+            Security
           </a>
         </p>
 
-        <p style="margin:10px 0 0; font-size:11px; color:#9CA3AF;">
-          ©2025-26 NoCapCode™. All rights reserved.<br/>
-          Build with Clarity.
+        <!-- Divider -->
+        <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+          <tr>
+            <td style="border-top:1px solid #E5E7EB; font-size:0; line-height:0;">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+
+        <!-- Footer Text -->
+        <p style="
+          margin:16px 0 6px;
+          font-size:11px;
+          color:#9CA3AF;
+          line-height:1.7;
+        ">
+          This communication was issued by the NoCapCode™ Talent Acquisition &amp; Human Resources Department.
         </p>
+
+        <p style="
+          margin:0 0 6px;
+          font-size:11px;
+          color:#9CA3AF;
+          line-height:1.7;
+        ">
+          Certificate Verification:
+          <a
+            href="https://nocapcode.cloud/verify/certificate/${employee._id}"
+            target="_blank"
+            style="
+              color:#4F46E5;
+              text-decoration:none;
+              font-weight:500;
+            "
+          >
+            nocapcode.cloud/verify/certificate/${employee._id}
+          </a>
+        </p>
+
+        <p style="
+          margin:0;
+          font-size:11px;
+          color:#9CA3AF;
+          line-height:1.7;
+        ">
+          © 2026 NoCapCode Inc. All Rights Reserved.<br>
+        </p>
+
       </td>
     </tr>
+  </table>
 
   </table>
 
