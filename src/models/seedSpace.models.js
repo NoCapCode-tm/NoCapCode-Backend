@@ -1,7 +1,6 @@
 import mongoose from "mongoose"
 
 const seedSpaceSchema = mongoose.Schema({
-
     businessName:{
         type: String,
         required:true
@@ -21,9 +20,18 @@ const seedSpaceSchema = mongoose.Schema({
     teamSize:{
         type:Number,
         required:true
+    },
+    requirementType:{
+        type:String,
+        required:true,
+        enum: ['Web Development', 'E-commerce Development', 'Web + E-commerce Development', 'Custom Development']
+    },
+    currentWebsite:{
+        type:String,
+        required:false
     }
 },{
-    timestamp: true
+    timestamps: true
 })
 
-export const SeedSpace = new mongoose.model("SeedSpace",seedSpaceSchema)
+export const SeedSpace = mongoose.model("SeedSpace", seedSpaceSchema)
